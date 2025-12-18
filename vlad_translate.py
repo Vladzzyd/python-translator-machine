@@ -6,9 +6,10 @@ bahasa = {"indonesia":"id",
           "inggris":"en",
           "jepang":"ja",
           "korea":"ko",
-          "russia":"ru"}
+          "russia":"ru",
+          "deteksi":""}
 riwayat_terjemahan ={}
-daftar_fungsi = ("translate","riwayat","quit")
+daftar_fungsi = ("translate","riwayat","delete","quit")
 counter_riwayat = 1
 
 def judul(teks):
@@ -53,7 +54,12 @@ def terjemahan():
             print(f"menerjemahkan bahasa dari {asal} ke {tujuan}..\n")
             break
 
-    tl = GoogleTranslator(source=bahasa[asal], target=bahasa[tujuan])
+    if asal == "deteksi":
+        asal = "deteksi bahasa"
+        tl = GoogleTranslator(target=bahasa[tujuan])
+
+    else: 
+        tl = GoogleTranslator(source=bahasa[asal], target=bahasa[tujuan])
 
     while True:
         teks = input("masukkan teks yang mau diterjemahkan (enter to quit): ")
@@ -70,7 +76,6 @@ def terjemahan():
         }
 
         counter_riwayat += 1
-
 
 def riwayat():
     judul("RIWAYAT TERJEMAHAN")
@@ -118,3 +123,6 @@ while True:
     elif fungsi == "quit":
         print("mematikan mesin..")
         break
+
+    elif fungsi  == "delete":
+        print("segera hadir..\n")
