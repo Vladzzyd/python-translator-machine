@@ -27,6 +27,7 @@ This version focuses on **code structure improvement** while keeping all previou
   * Auto language detection (`deteksi`)
 * Translation history with incremental ID
 * Well-formatted history display (wrapped text)
+* ANSI-colored terminal output
 * Input validation:
 
   * No empty input
@@ -35,19 +36,9 @@ This version focuses on **code structure improvement** while keeping all previou
 
 ---
 
-## What’s New in v3
+## What’s New in v4
 
-* Refactored from procedural code into a **single class-based architecture**
-* Removed all global variables
-* Centralized application state:
-
-  * translation history
-  * language configuration
-  * ID counter
-* Added **auto language detection mode**
-* Cleaner entry point using `run()` method
-
-> This refactor prepares the project for future scalability (file saving, delete feature, config expansion).
+* ANSI-colored terminal output
 
 ---
 
@@ -82,4 +73,4 @@ The goal is to simulate how a small real-world CLI app **naturally evolves** ove
 * Unit testing
 
 
-> Built as part of a personal Python learning journey 🚀
+> Built as part of a personal Python learning journey 
