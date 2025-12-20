@@ -7,7 +7,7 @@ This repository documents not just features, but **progressive improvements in c
 
 ## Version
 
-**v3.0 – Class-based Refactor & Detection Mode**
+**v5.0 – Class-based Refactor & Detection Mode**
 
 This version focuses on **code structure improvement** while keeping all previous features intact.
 
@@ -28,6 +28,7 @@ This version focuses on **code structure improvement** while keeping all previou
 * Translation history with incremental ID
 * Well-formatted history display (wrapped text)
 * ANSI-colored terminal output
+* delete history with two delete options
 * Input validation:
 
   * No empty input
@@ -36,9 +37,9 @@ This version focuses on **code structure improvement** while keeping all previou
 
 ---
 
-## What’s New in v4
+## What’s New in v5
 
-* ANSI-colored terminal output
+* delete history with two delete options
 
 ---
 
