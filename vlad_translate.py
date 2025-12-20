@@ -18,7 +18,8 @@ bahasa = {"indonesia":"id",
           "russia":"ru",
           "deteksi":""}
 riwayat_terjemahan ={}
-daftar_fungsi = ("translate","riwayat","delete","quit")
+daftar_fungsi = ("translate","riwayat","hapus","quit")
+daftar_hapus = ("hapus","reset","quit")
 counter_riwayat = 1
 
 def judul(teks):
@@ -107,6 +108,53 @@ def riwayat():
             print(BRIGHT_GREEN+f"     | {k.center(30)} | {v.center(30)}"+RESET)
     print()
 
+def hapus():
+    while True:
+        judul("MENU HAPUS RIWAYAT")
+
+        if not riwayat_terjemahan:
+            print(BRIGHT_YELLOW+"\nriwayat tersimpan kosong"+RESET)
+            print(BRIGHT_GREEN+"kembali ke menu utama..\n"+RESET)
+            return
+
+        for i, key in enumerate(daftar_hapus, start=1):
+            print(f"{BOLD}{BRIGHT_MAGENTA}[{i}]{RESET} {key}")
+
+        while True:
+            fungsi = input(BRIGHT_BLUE+"\nmasukkan fungsi yang ingin digunakan: "+RESET).lower().strip()
+            if not fungsi:
+                print(BRIGHT_RED+"ERROR: fungsi tidak boleh kosong!!"+RESET)
+            elif fungsi not in daftar_hapus:
+                print(BRIGHT_RED+"ERROR: fungsi tidak valid!!"+RESET)
+            else:
+                break
+        
+        if fungsi == "hapus":
+            while True:
+                indeks = input(BRIGHT_BLUE+"masukkan indeks riwayat yang ingin dihapus (q to quit): "+RESET)
+                if indeks == "q":
+                    print("kembali ke menu hapus..\n")
+                    break
+                if not indeks.isdigit():
+                    print(BRIGHT_RED+"indeks harus angka!"+RESET)
+                    continue
+
+                indeks = int(indeks)
+                if indeks not in riwayat_terjemahan:
+                    print(BRIGHT_RED+f"ERROR: riwayat dengan indeks {indeks} tidak ditemukan!!\n"+RESET)
+                    continue
+            
+                del riwayat_terjemahan[int(indeks)]
+                print(BRIGHT_GREEN+f"berhasil menghapus riwayat dengan indeks {indeks}"+RESET)
+        
+        elif fungsi == "reset":
+            riwayat_terjemahan.clear()
+            print(BRIGHT_GREEN+"semua riwayat berhasil dihapus!"+RESET)
+            return
+        
+        elif fungsi == "quit":
+            print(BRIGHT_GREEN+"keluar dari menu hapus..\n"+RESET)
+            return
 
 while True:
     judul("VLAD TRANSLATOR")
@@ -130,9 +178,10 @@ while True:
         print(BRIGHT_GREEN+"memasuki riwayat terjemahan..\n"+RESET)
         riwayat()
 
+    elif fungsi  == "hapus":
+        print(BRIGHT_GREEN+"memasuki menu hapus..\n"+RESET)
+        hapus()
+
     elif fungsi == "quit":
         print(BRIGHT_GREEN+"mematikan mesin.."+RESET)
         break
-
-    elif fungsi  == "delete":
-        print(BRIGHT_YELLOW+"segera hadir..\n"+RESET)
