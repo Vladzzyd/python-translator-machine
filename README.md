@@ -7,7 +7,7 @@ This repository documents not just features, but **progressive improvements in c
 
 ## Version
 
-**v5.0 – Class-based Refactor & Detection Mode**
+**v6.0 – Class-based Refactor & Detection Mode**
 
 This version focuses on **code structure improvement** while keeping all previous features intact.
 
@@ -19,11 +19,7 @@ This version focuses on **code structure improvement** while keeping all previou
 * Translate text continuously without restarting the app
 * Supported languages:
 
-  * Indonesia (`id`)
-  * English (`en`)
-  * Japanese (`ja`)
-  * Korean (`ko`)
-  * Russian (`ru`)
+  * 17 language available
   * Auto language detection (`deteksi`)
 * Translation history with incremental ID
 * Well-formatted history display (wrapped text)
@@ -37,9 +33,10 @@ This version focuses on **code structure improvement** while keeping all previou
 
 ---
 
-## What’s New in v5
+## What’s New in v6
 
-* delete history with two delete options
+* add more language in program
+* can use index to pick the language
 
 ---
 
