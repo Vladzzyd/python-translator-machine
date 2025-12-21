@@ -16,6 +16,17 @@ bahasa = {"indonesia":"id",
           "jepang":"ja",
           "korea":"ko",
           "russia":"ru",
+          "arab":"ar",
+          "mandarin":"zh-CN",
+          "thai":"th",
+          "jerman":"de",
+          "prancis":"fr",
+          "spanyol":"es",
+          "portugis":"pt",
+          "italia":"it",
+          "belanda":"nl",
+          "turki":"tr",
+          "hindi":"hi",
           "deteksi":""}
 riwayat_terjemahan ={}
 daftar_fungsi = ("translate","riwayat","hapus","quit")
@@ -27,6 +38,33 @@ def judul(teks):
     print(BOLD+BRIGHT_MAGENTA+teks.center(50)+RESET)
     print(BRIGHT_MAGENTA+"="*50+RESET)
 
+def pilih_bahasa(prompt, otomatis=True):
+    while True:
+        pilihan = input(prompt).lower().strip()
+
+        if pilihan == "q":
+            return "q"
+        
+        if pilihan.isdigit():
+            indeks = int(pilihan) - 1
+            if 0 <= indeks < len(bahasa):
+                bahasa_pilihan = list(bahasa.keys())[indeks]
+                if bahasa_pilihan == "deteksi" and not otomatis:
+                    print(BRIGHT_RED+"ERROR: deteksi tidak bisa dipilih disini!!\n"+RESET)
+                    continue
+                return bahasa_pilihan
+            else:
+                print(BRIGHT_RED+"nomor tidak valid!!\n"+RESET)
+        
+        elif pilihan in bahasa:
+            if pilihan == "deteksi" and not otomatis:
+                print(BRIGHT_RED+"deteksi bahasa tidak bisa dipilih disini!!\n"+RESET)
+                continue
+            return pilihan
+        
+        else:
+            print(BRIGHT_RED+"bahasa tidak dikenali!!\n"+RESET)
+
 def terjemahan():
     global counter_riwayat
     
@@ -35,34 +73,19 @@ def terjemahan():
     for i, key in enumerate(bahasa, start=1):
         print(f"{BOLD}{BRIGHT_MAGENTA}[{i}]{RESET} {key}")
 
-    while True:
-        asal = input(BRIGHT_BLUE+"\nmasukkan asal bahasa (q to quit): "+RESET).lower().strip()
-        if asal == "q":
-            print(BRIGHT_GREEN+"kembali ke menu utama..\n"+RESET)
-            return
-        if not asal:
-            print(BRIGHT_RED+"ERROR: asal bahasa tidak boleh kosong!!"+RESET)
-        elif asal not in bahasa:
-            print(BRIGHT_RED+"ERROR: bahasa belum tersedia!!"+RESET)
-        else:
-            print(BRIGHT_GREEN+f"asal bahasa adalah {asal}"+RESET)
-            break
+    asal = pilih_bahasa(BRIGHT_BLUE+"\nmasukkan asal bahasa (nama / angka, q to quit): "+RESET, otomatis=True)
+    if asal == "q":
+        print(BRIGHT_GREEN+"kembali ke menu utama..\n"+RESET)
+        return
 
     while True:
-
-        tujuan = input(BRIGHT_BLUE+"\nmasukkan tujuan bahasa (q to quit): "+RESET).lower().strip()
+        tujuan =  pilih_bahasa(BRIGHT_BLUE+"\nmasukkan tujuan bahasa (nama / angka, q to quit): "+RESET, otomatis=False)
         if tujuan == "q":
             print(BRIGHT_GREEN+"kembali ke menu utama..\n"+RESET)
             return
-        if not tujuan:
-            print(BRIGHT_RED+"ERROR: tujuan bahasa tidak boleh kosong!!"+RESET)
-        elif tujuan not in bahasa:
-            print(BRIGHT_RED+"ERROR: bahasa belum tersedia!!"+RESET)
-        elif asal == tujuan:
-            print(BRIGHT_RED+"ERROR: asal dan tujuan bahasa tidak boleh sama!!"+RESET)
-        else:
-            print(BRIGHT_GREEN+f"menerjemahkan bahasa dari {asal} ke {tujuan}..\n"+RESET)
+        if tujuan != asal:
             break
+        print(BRIGHT_RED+"ERROR: asal dan tujuan bahasa tidak boleh sama!!\n"+RESET)
 
     if asal == "deteksi":
         asal = "deteksi bahasa"
@@ -109,6 +132,7 @@ def riwayat():
     print()
 
 def hapus():
+    global counter_riwayat
     while True:
         judul("MENU HAPUS RIWAYAT")
 
@@ -145,16 +169,31 @@ def hapus():
                     continue
             
                 del riwayat_terjemahan[int(indeks)]
+                reindex_riwayat()
                 print(BRIGHT_GREEN+f"berhasil menghapus riwayat dengan indeks {indeks}"+RESET)
         
         elif fungsi == "reset":
             riwayat_terjemahan.clear()
             print(BRIGHT_GREEN+"semua riwayat berhasil dihapus!"+RESET)
+            counter_riwayat = 1
             return
         
         elif fungsi == "quit":
             print(BRIGHT_GREEN+"keluar dari menu hapus..\n"+RESET)
             return
+        
+def reindex_riwayat():
+    global riwayat_terjemahan, counter_riwayat
+
+    riwayat_baru = {}
+    counter = 1
+
+    for data in riwayat_terjemahan.values():
+        riwayat_baru[counter] = data
+        counter += 1
+
+    riwayat_terjemahan = riwayat_baru
+    counter_riwayat = counter
 
 while True:
     judul("VLAD TRANSLATOR")
