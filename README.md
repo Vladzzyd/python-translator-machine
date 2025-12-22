@@ -7,7 +7,7 @@ This repository documents not just features, but **progressive improvements in c
 
 ## Version
 
-**v6.0 – Class-based Refactor & Detection Mode**
+**v7.0 – Class-based Refactor & Detection Mode**
 
 This version focuses on **code structure improvement** while keeping all previous features intact.
 
@@ -33,10 +33,9 @@ This version focuses on **code structure improvement** while keeping all previou
 
 ---
 
-## What’s New in v6
+## What’s New in v7
 
-* add more language in program
-* can use index to pick the language
+* remake program using class
 
 ---
 
